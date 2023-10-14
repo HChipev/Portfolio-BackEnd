@@ -12,6 +12,8 @@ namespace Data
         }
 
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Framework> Frameworks { get; set; }
+        public DbSet<Tool> Tools { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -4,8 +4,8 @@ using Data.Entities.Abstract;
 
 namespace Data.Entities
 {
-    [Table("Languages")]
-    public class Language : IBaseEntity
+    [Table("Tools")]
+    public class Tool : IBaseEntity
     {
         [Key]
         public int Id { get; set; }
