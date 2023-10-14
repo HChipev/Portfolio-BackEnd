@@ -3,6 +3,7 @@ using System.Text;
 using Data;
 using Data.Entities;
 using Data.Repository;
+using Data.ViewModels.Language.Profiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -53,10 +54,13 @@ namespace Portfolio_BackEnd.Extension
             return services;
         }
 
-        // public static IServiceCollection RegisterAutoMapper(this IServiceCollection services, IConfiguration configuration)
-        // {
-        //     services.AddAutoMapper(typeof(UserProfile));
-        // }
+        public static IServiceCollection RegisterAutoMapper(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddAutoMapper(typeof(LanguageProfile));
+
+            return services;
+        }
 
         public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {

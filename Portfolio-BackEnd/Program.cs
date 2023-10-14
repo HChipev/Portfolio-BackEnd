@@ -14,6 +14,7 @@ builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.ConfigureServices(builder.Configuration, builder.Environment);
 builder.Services.RegisterFilters();
 builder.Services.RegisterSwagger();
+builder.Services.RegisterAutoMapper(builder.Configuration);
 
 var app = builder.Build();
 

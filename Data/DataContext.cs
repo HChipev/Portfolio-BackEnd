@@ -11,6 +11,8 @@ namespace Data
         {
         }
 
+        public DbSet<Language> Languages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
