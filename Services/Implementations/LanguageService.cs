@@ -86,5 +86,24 @@ namespace Services.Implementations
                 return new ServiceResult<LanguageViewModel> { Message = e.Message, IsSuccess = false };
             }
         }
+
+        public ServiceResult<IEnumerable<LanguageViewModel>> GetLanguages()
+        {
+            try
+            {
+                var languages = _languageRepository.GetAll();
+
+                return new ServiceResult<IEnumerable<LanguageViewModel>>
+                {
+                    Message = "",
+                    IsSuccess = true,
+                    Data = _mapper.Map<IEnumerable<LanguageViewModel>>(languages)
+                };
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult<IEnumerable<LanguageViewModel>> { Message = e.Message, IsSuccess = false };
+            }
+        }
     }
 }

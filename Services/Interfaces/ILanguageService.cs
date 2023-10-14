@@ -13,5 +13,7 @@ namespace Services.Interfaces
         public ServiceResult<bool> UpdateLanguage(LanguageViewModel language);
 
         public ServiceResult<LanguageViewModel> GetLanguage(int id);
+        
+        public ServiceResult<IEnumerable<LanguageViewModel>> GetLanguages();
     }
 }

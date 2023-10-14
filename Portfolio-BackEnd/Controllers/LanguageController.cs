@@ -71,5 +71,19 @@ namespace Portfolio_BackEnd.Controllers
 
             return BadRequest(result.Data);
         }
+
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public IActionResult GetLanguages()
+        {
+            var result = _languageService.GetLanguages();
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.Data);
+        }
     }
 }
