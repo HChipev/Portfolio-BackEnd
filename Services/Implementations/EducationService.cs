@@ -2,28 +2,28 @@ using AutoMapper;
 using Common;
 using Data.Entities;
 using Data.Repository;
-using Data.ViewModels.Framework.Models;
+using Data.ViewModels.Education.Models;
 using Services.Interfaces;
 
 namespace Services.Implementations
 {
-    public class FrameworkService : IFrameworkService
+    public class EducationService : IEducationService
     {
-        private readonly IRepository<Framework> _frameworkRepository;
+        private readonly IRepository<Education> _educationRepository;
         private readonly IMapper _mapper;
 
-        public FrameworkService(IRepository<Framework> frameworkRepository, IMapper mapper)
+        public EducationService(IRepository<Education> educationRepository, IMapper mapper)
         {
-            _frameworkRepository = frameworkRepository;
+            _educationRepository = educationRepository;
             _mapper = mapper;
         }
 
-        public ServiceResult<bool> AddFramework(FrameworkViewModel framework)
+        public ServiceResult<bool> AddEducation(EducationViewModel education)
         {
             try
             {
-                _frameworkRepository.Add(_mapper.Map<Framework>(framework));
-                _frameworkRepository.SaveChanges();
+                _educationRepository.Add(_mapper.Map<Education>(education));
+                _educationRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -33,12 +33,12 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<bool> DeleteFramework(int id)
+        public ServiceResult<bool> DeleteEducation(int id)
         {
             try
             {
-                _frameworkRepository.Remove(id);
-                _frameworkRepository.SaveChanges();
+                _educationRepository.Remove(id);
+                _educationRepository.SaveChanges();
 
                 return new ServiceResult<bool>
                 {
@@ -53,12 +53,12 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<bool> UpdateFramework(FrameworkViewModel framework)
+        public ServiceResult<bool> UpdateEducation(EducationViewModel education)
         {
             try
             {
-                _frameworkRepository.Update(_mapper.Map<Framework>(framework));
-                _frameworkRepository.SaveChanges();
+                _educationRepository.Update(_mapper.Map<Education>(education));
+                _educationRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -68,41 +68,41 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<FrameworkViewModel> GetFramework(int id)
+        public ServiceResult<EducationViewModel> GetEducation(int id)
         {
             try
             {
-                var framework = _frameworkRepository.Find(id);
+                var education = _educationRepository.Find(id);
 
-                return new ServiceResult<FrameworkViewModel>
+                return new ServiceResult<EducationViewModel>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<FrameworkViewModel>(framework)
+                    Data = _mapper.Map<EducationViewModel>(education)
                 };
             }
             catch (Exception e)
             {
-                return new ServiceResult<FrameworkViewModel> { Message = e.Message, IsSuccess = false };
+                return new ServiceResult<EducationViewModel> { Message = e.Message, IsSuccess = false };
             }
         }
 
-        public ServiceResult<IEnumerable<FrameworkViewModel>> GetFrameworks()
+        public ServiceResult<IEnumerable<EducationViewModel>> GetEducations()
         {
             try
             {
-                var frameworks = _frameworkRepository.GetAll();
+                var educations = _educationRepository.GetAll();
 
-                return new ServiceResult<IEnumerable<FrameworkViewModel>>
+                return new ServiceResult<IEnumerable<EducationViewModel>>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<IEnumerable<FrameworkViewModel>>(frameworks)
+                    Data = _mapper.Map<IEnumerable<EducationViewModel>>(educations)
                 };
             }
             catch (Exception e)
             {
-                return new ServiceResult<IEnumerable<FrameworkViewModel>> { Message = e.Message, IsSuccess = false };
+                return new ServiceResult<IEnumerable<EducationViewModel>> { Message = e.Message, IsSuccess = false };
             }
         }
     }

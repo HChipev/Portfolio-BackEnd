@@ -1,4 +1,4 @@
-using Data.ViewModels.Framework.Models;
+using Data.ViewModels.Education.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
@@ -7,20 +7,20 @@ namespace Portfolio_BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FrameworkController : ControllerBase
+    public class EducationController : ControllerBase
     {
-        private readonly IFrameworkService _frameworkService;
+        private readonly IEducationService _educationService;
 
-        public FrameworkController(IFrameworkService frameworkService)
+        public EducationController(IEducationService educationService)
         {
-            _frameworkService = frameworkService;
+            _educationService = educationService;
         }
 
         [HttpPost("add")]
         [Authorize]
-        public IActionResult AddFramework([FromBody] FrameworkViewModel framework)
+        public IActionResult AddEducation([FromBody] EducationViewModel education)
         {
-            var result = _frameworkService.AddFramework(framework);
+            var result = _educationService.AddEducation(education);
 
             if (result.IsSuccess)
             {
@@ -32,9 +32,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public IActionResult UpdateFramework([FromBody] FrameworkViewModel framework)
+        public IActionResult UpdateEducation([FromBody] EducationViewModel education)
         {
-            var result = _frameworkService.UpdateFramework(framework);
+            var result = _educationService.UpdateEducation(education);
 
             if (result.IsSuccess)
             {
@@ -46,9 +46,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpDelete("delete/{id}")]
         [Authorize]
-        public IActionResult DeleteFramework(int id)
+        public IActionResult DeleteEducation(int id)
         {
-            var result = _frameworkService.DeleteFramework(id);
+            var result = _educationService.DeleteEducation(id);
 
             if (result.IsSuccess)
             {
@@ -60,9 +60,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpGet("get/{id}")]
         [AllowAnonymous]
-        public IActionResult GetFramework(int id)
+        public IActionResult GetEducation(int id)
         {
-            var result = _frameworkService.GetFramework(id);
+            var result = _educationService.GetEducation(id);
 
             if (result.IsSuccess)
             {
@@ -74,9 +74,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpGet("all")]
         [AllowAnonymous]
-        public IActionResult GetFrameworks()
+        public IActionResult GetEducations()
         {
-            var result = _frameworkService.GetFrameworks();
+            var result = _educationService.GetEducations();
 
             if (result.IsSuccess)
             {

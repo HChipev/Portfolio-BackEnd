@@ -2,28 +2,31 @@ using AutoMapper;
 using Common;
 using Data.Entities;
 using Data.Repository;
-using Data.ViewModels.Framework.Models;
+using Data.ViewModels.Work.Models;
 using Services.Interfaces;
 
 namespace Services.Implementations
 {
-    public class FrameworkService : IFrameworkService
+    public class WorkService : IWorkService
     {
-        private readonly IRepository<Framework> _frameworkRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository<Position> _positionRepository;
+        private readonly IRepository<Work> _workRepository;
 
-        public FrameworkService(IRepository<Framework> frameworkRepository, IMapper mapper)
+        public WorkService(IRepository<Work> workRepository, IMapper mapper, IRepository<Position> positionRepository)
         {
-            _frameworkRepository = frameworkRepository;
+            _workRepository = workRepository;
             _mapper = mapper;
+            _positionRepository = positionRepository;
         }
 
-        public ServiceResult<bool> AddFramework(FrameworkViewModel framework)
+        public ServiceResult<bool> AddWork(WorkViewModel work)
         {
             try
             {
-                _frameworkRepository.Add(_mapper.Map<Framework>(framework));
-                _frameworkRepository.SaveChanges();
+                _workRepository.Add(_mapper.Map<Work>(work));
+
+                _workRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -33,12 +36,15 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<bool> DeleteFramework(int id)
+        public ServiceResult<bool> DeleteWork(int id)
         {
             try
             {
-                _frameworkRepository.Remove(id);
-                _frameworkRepository.SaveChanges();
+                _positionRepository.Remove(x => x.WorkId == id);
+                _workRepository.Remove(id);
+
+                _workRepository.SaveChanges();
+                _positionRepository.SaveChanges();
 
                 return new ServiceResult<bool>
                 {
@@ -53,12 +59,13 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<bool> UpdateFramework(FrameworkViewModel framework)
+        public ServiceResult<bool> UpdateWork(WorkViewModel work)
         {
             try
             {
-                _frameworkRepository.Update(_mapper.Map<Framework>(framework));
-                _frameworkRepository.SaveChanges();
+                _workRepository.Update(_mapper.Map<Work>(work));
+
+                _workRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -68,41 +75,41 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<FrameworkViewModel> GetFramework(int id)
+        public ServiceResult<WorkViewModel> GetWork(int id)
         {
             try
             {
-                var framework = _frameworkRepository.Find(id);
+                var work = _workRepository.Find(id);
 
-                return new ServiceResult<FrameworkViewModel>
+                return new ServiceResult<WorkViewModel>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<FrameworkViewModel>(framework)
+                    Data = _mapper.Map<WorkViewModel>(work)
                 };
             }
             catch (Exception e)
             {
-                return new ServiceResult<FrameworkViewModel> { Message = e.Message, IsSuccess = false };
+                return new ServiceResult<WorkViewModel> { Message = e.Message, IsSuccess = false };
             }
         }
 
-        public ServiceResult<IEnumerable<FrameworkViewModel>> GetFrameworks()
+        public ServiceResult<IEnumerable<WorkViewModel>> GetWorks()
         {
             try
             {
-                var frameworks = _frameworkRepository.GetAll();
+                var works = _workRepository.GetAll();
 
-                return new ServiceResult<IEnumerable<FrameworkViewModel>>
+                return new ServiceResult<IEnumerable<WorkViewModel>>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<IEnumerable<FrameworkViewModel>>(frameworks)
+                    Data = _mapper.Map<IEnumerable<WorkViewModel>>(works)
                 };
             }
             catch (Exception e)
             {
-                return new ServiceResult<IEnumerable<FrameworkViewModel>> { Message = e.Message, IsSuccess = false };
+                return new ServiceResult<IEnumerable<WorkViewModel>> { Message = e.Message, IsSuccess = false };
             }
         }
     }

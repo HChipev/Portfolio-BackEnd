@@ -14,10 +14,15 @@ namespace Data
         public DbSet<Language> Languages { get; set; }
         public DbSet<Framework> Frameworks { get; set; }
         public DbSet<Tool> Tools { get; set; }
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<Work> Works { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            new WorkConfigurator().Configure(modelBuilder.Entity<Work>());
             SeedConfigurator.Seed(modelBuilder);
         }
     }

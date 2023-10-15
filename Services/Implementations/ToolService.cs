@@ -9,21 +9,21 @@ namespace Services.Implementations
 {
     public class ToolService : IToolService
     {
-        private readonly IRepository<Tool> _languageRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository<Tool> _toolRepository;
 
-        public ToolService(IRepository<Tool> languageRepository, IMapper mapper)
+        public ToolService(IRepository<Tool> toolRepository, IMapper mapper)
         {
-            _languageRepository = languageRepository;
+            _toolRepository = toolRepository;
             _mapper = mapper;
         }
 
-        public ServiceResult<bool> AddTool(ToolViewModel language)
+        public ServiceResult<bool> AddTool(ToolViewModel tool)
         {
             try
             {
-                _languageRepository.Add(_mapper.Map<Tool>(language));
-                _languageRepository.SaveChanges();
+                _toolRepository.Add(_mapper.Map<Tool>(tool));
+                _toolRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -37,8 +37,8 @@ namespace Services.Implementations
         {
             try
             {
-                _languageRepository.Remove(id);
-                _languageRepository.SaveChanges();
+                _toolRepository.Remove(id);
+                _toolRepository.SaveChanges();
 
                 return new ServiceResult<bool>
                 {
@@ -53,12 +53,12 @@ namespace Services.Implementations
             }
         }
 
-        public ServiceResult<bool> UpdateTool(ToolViewModel language)
+        public ServiceResult<bool> UpdateTool(ToolViewModel tool)
         {
             try
             {
-                _languageRepository.Update(_mapper.Map<Tool>(language));
-                _languageRepository.SaveChanges();
+                _toolRepository.Update(_mapper.Map<Tool>(tool));
+                _toolRepository.SaveChanges();
 
                 return new ServiceResult<bool> { Message = "", IsSuccess = true, Data = true };
             }
@@ -72,13 +72,13 @@ namespace Services.Implementations
         {
             try
             {
-                var language = _languageRepository.Find(id);
+                var tool = _toolRepository.Find(id);
 
                 return new ServiceResult<ToolViewModel>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<ToolViewModel>(language)
+                    Data = _mapper.Map<ToolViewModel>(tool)
                 };
             }
             catch (Exception e)
@@ -91,13 +91,13 @@ namespace Services.Implementations
         {
             try
             {
-                var languages = _languageRepository.GetAll();
+                var tools = _toolRepository.GetAll();
 
                 return new ServiceResult<IEnumerable<ToolViewModel>>
                 {
                     Message = "",
                     IsSuccess = true,
-                    Data = _mapper.Map<IEnumerable<ToolViewModel>>(languages)
+                    Data = _mapper.Map<IEnumerable<ToolViewModel>>(tools)
                 };
             }
             catch (Exception e)

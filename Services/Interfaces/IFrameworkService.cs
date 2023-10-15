@@ -6,11 +6,11 @@ namespace Services.Interfaces
 {
     public interface IFrameworkService : IService
     {
-        public ServiceResult<bool> AddFramework(FrameworkViewModel language);
+        public ServiceResult<bool> AddFramework(FrameworkViewModel framework);
 
         public ServiceResult<bool> DeleteFramework(int id);
 
-        public ServiceResult<bool> UpdateFramework(FrameworkViewModel language);
+        public ServiceResult<bool> UpdateFramework(FrameworkViewModel framework);
 
         public ServiceResult<FrameworkViewModel> GetFramework(int id);
 

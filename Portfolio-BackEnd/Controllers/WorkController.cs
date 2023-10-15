@@ -1,4 +1,4 @@
-using Data.ViewModels.Framework.Models;
+using Data.ViewModels.Work.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
@@ -7,20 +7,20 @@ namespace Portfolio_BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FrameworkController : ControllerBase
+    public class WorkController : ControllerBase
     {
-        private readonly IFrameworkService _frameworkService;
+        private readonly IWorkService _workService;
 
-        public FrameworkController(IFrameworkService frameworkService)
+        public WorkController(IWorkService workService)
         {
-            _frameworkService = frameworkService;
+            _workService = workService;
         }
 
         [HttpPost("add")]
         [Authorize]
-        public IActionResult AddFramework([FromBody] FrameworkViewModel framework)
+        public IActionResult AddWork([FromBody] WorkViewModel work)
         {
-            var result = _frameworkService.AddFramework(framework);
+            var result = _workService.AddWork(work);
 
             if (result.IsSuccess)
             {
@@ -32,9 +32,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public IActionResult UpdateFramework([FromBody] FrameworkViewModel framework)
+        public IActionResult UpdateWork([FromBody] WorkViewModel work)
         {
-            var result = _frameworkService.UpdateFramework(framework);
+            var result = _workService.UpdateWork(work);
 
             if (result.IsSuccess)
             {
@@ -46,9 +46,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpDelete("delete/{id}")]
         [Authorize]
-        public IActionResult DeleteFramework(int id)
+        public IActionResult DeleteWork(int id)
         {
-            var result = _frameworkService.DeleteFramework(id);
+            var result = _workService.DeleteWork(id);
 
             if (result.IsSuccess)
             {
@@ -60,9 +60,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpGet("get/{id}")]
         [AllowAnonymous]
-        public IActionResult GetFramework(int id)
+        public IActionResult GetWork(int id)
         {
-            var result = _frameworkService.GetFramework(id);
+            var result = _workService.GetWork(id);
 
             if (result.IsSuccess)
             {
@@ -74,9 +74,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpGet("all")]
         [AllowAnonymous]
-        public IActionResult GetFrameworks()
+        public IActionResult GetWorks()
         {
-            var result = _frameworkService.GetFrameworks();
+            var result = _workService.GetWorks();
 
             if (result.IsSuccess)
             {

@@ -10,6 +10,7 @@ namespace Data.Repository
         void Add(T entity);
         void Update(T entity);
         T? Remove(int id);
+        void Remove(Expression<Func<T, bool>> predicate);
         bool SaveChanges();
         T? FindByCondition(Expression<Func<T, bool>> predicate);
         IQueryable<T> FindAllByCondition(Expression<Func<T, bool>> predicate);

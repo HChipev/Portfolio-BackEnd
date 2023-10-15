@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Data.Entities;
 using Data.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,11 @@ namespace Data.Repository
 
         public IQueryable<T> GetAll()
         {
+            if (typeof(T) == typeof(Work))
+            {
+                return _entities.AsQueryable().Include("Positions");
+            }
+
             return _entities.AsQueryable();
         }
 
@@ -26,6 +32,11 @@ namespace Data.Repository
             if (entity is null)
             {
                 return null;
+            }
+
+            if (typeof(T) == typeof(Work))
+            {
+                _entities.Entry(entity).Collection("Positions").Load();
             }
 
             return entity;
@@ -76,6 +87,17 @@ namespace Data.Repository
         {
             _entities.Attach(obj);
             _context.Entry(obj).State = EntityState.Modified;
+        }
+
+        public void Remove(Expression<Func<T, bool>> predicate)
+        {
+            var entities = _entities.Where(predicate).ToList();
+            if (entities.Count < 1)
+            {
+                return;
+            }
+
+            _entities.RemoveRange(entities);
         }
     }
 }

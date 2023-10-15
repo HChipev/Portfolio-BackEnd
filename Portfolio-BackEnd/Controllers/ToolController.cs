@@ -9,18 +9,18 @@ namespace Portfolio_BackEnd.Controllers
     [ApiController]
     public class ToolController : ControllerBase
     {
-        private readonly IToolService _languageService;
+        private readonly IToolService _toolService;
 
-        public ToolController(IToolService languageService)
+        public ToolController(IToolService toolService)
         {
-            _languageService = languageService;
+            _toolService = toolService;
         }
 
         [HttpPost("add")]
         [Authorize]
-        public IActionResult AddTool([FromBody] ToolViewModel language)
+        public IActionResult AddTool([FromBody] ToolViewModel tool)
         {
-            var result = _languageService.AddTool(language);
+            var result = _toolService.AddTool(tool);
 
             if (result.IsSuccess)
             {
@@ -32,9 +32,9 @@ namespace Portfolio_BackEnd.Controllers
 
         [HttpPut("update")]
         [Authorize]
-        public IActionResult UpdateTool([FromBody] ToolViewModel language)
+        public IActionResult UpdateTool([FromBody] ToolViewModel tool)
         {
-            var result = _languageService.UpdateTool(language);
+            var result = _toolService.UpdateTool(tool);
 
             if (result.IsSuccess)
             {
@@ -48,7 +48,7 @@ namespace Portfolio_BackEnd.Controllers
         [Authorize]
         public IActionResult DeleteTool(int id)
         {
-            var result = _languageService.DeleteTool(id);
+            var result = _toolService.DeleteTool(id);
 
             if (result.IsSuccess)
             {
@@ -62,7 +62,7 @@ namespace Portfolio_BackEnd.Controllers
         [AllowAnonymous]
         public IActionResult GetTool(int id)
         {
-            var result = _languageService.GetTool(id);
+            var result = _toolService.GetTool(id);
 
             if (result.IsSuccess)
             {
@@ -76,7 +76,7 @@ namespace Portfolio_BackEnd.Controllers
         [AllowAnonymous]
         public IActionResult GetTools()
         {
-            var result = _languageService.GetTools();
+            var result = _toolService.GetTools();
 
             if (result.IsSuccess)
             {
