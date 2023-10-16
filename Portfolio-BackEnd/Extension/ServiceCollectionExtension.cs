@@ -28,7 +28,7 @@ namespace Portfolio_BackEnd.Extension
             else if (environment.IsProduction())
             {
                 services.AddDbContext<DataContext>(options =>
-                    options.UseSqlServer(Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")));
+                    options.UseSqlServer(Environment.GetEnvironmentVariable("MSSQL_URL")));
             }
 
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<DataContext>()
