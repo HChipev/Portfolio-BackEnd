@@ -18,6 +18,7 @@ namespace Data
         public DbSet<Work> Works { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
