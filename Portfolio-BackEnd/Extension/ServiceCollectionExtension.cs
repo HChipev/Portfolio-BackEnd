@@ -29,6 +29,12 @@ namespace Portfolio_BackEnd.Extension
             {
                 services.AddDbContext<DataContext>(options =>
                     options.UseSqlServer(Environment.GetEnvironmentVariable("MSSQL_URL")));
+
+                using (var context = new DataContext(new DbContextOptionsBuilder<DataContext>()
+                           .UseSqlServer(Environment.GetEnvironmentVariable("MSSQL_URL")).Options))
+                {
+                    context.Database.Migrate();
+                }
             }
 
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<DataContext>()
