@@ -17,6 +17,7 @@ namespace Data
         public DbSet<Education> Educations { get; set; }
         public DbSet<Work> Works { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
