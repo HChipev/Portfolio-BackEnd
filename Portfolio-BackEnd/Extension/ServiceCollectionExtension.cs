@@ -18,10 +18,18 @@ namespace Portfolio_BackEnd.Extension
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection RegisterDbContext(this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration, IWebHostEnvironment environment)
         {
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+            if (environment.IsDevelopment())
+            {
+                services.AddDbContext<DataContext>(options =>
+                    options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
+            }
+            else if (environment.IsProduction())
+            {
+                services.AddDbContext<DataContext>(options =>
+                    options.UseSqlServer(Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")));
+            }
 
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
@@ -44,6 +52,19 @@ namespace Portfolio_BackEnd.Extension
                     options.AddDefaultPolicy(builder =>
                     {
                         builder.WithOrigins("*")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .WithExposedHeaders("*");
+                    });
+                });
+            }
+            else if (environment.IsProduction())
+            {
+                services.AddCors(options =>
+                {
+                    options.AddDefaultPolicy(builder =>
+                    {
+                        builder.WithOrigins("https://hristo.ch")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .WithExposedHeaders("*");
@@ -79,7 +100,8 @@ namespace Portfolio_BackEnd.Extension
                         ValidIssuer = configuration["Jwt:Issuer"],
                         ValidAudience = configuration["Jwt:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey
-                            (Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+                        (Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET") ??
+                                                configuration["JWT:Key"])),
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,

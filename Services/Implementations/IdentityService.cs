@@ -90,7 +90,8 @@ namespace Services.Implementations
                 var principal = tokenHandler.ValidateToken(tokens.Token, new TokenValidationParameters
                 {
                     IssuerSigningKey = new SymmetricSecurityKey
-                        (Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])),
+                    (Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET") ??
+                                            _configuration["JWT:Key"])),
                     ValidateIssuer = true,
                     ValidIssuer = _configuration["JWT:Issuer"],
                     ValidateAudience = true,

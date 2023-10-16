@@ -97,7 +97,8 @@ namespace Services.Implementations
         {
             return new SigningCredentials(
                 new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
+                    Encoding.UTF8.GetBytes(
+                        Environment.GetEnvironmentVariable("JWT_SECRET") ?? _configuration["JWT:Key"])
                 ),
                 SecurityAlgorithms.HmacSha256
             );
