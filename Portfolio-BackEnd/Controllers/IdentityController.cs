@@ -29,7 +29,7 @@ namespace Portfolio_BackEnd.Controllers
                 Response.Headers.Add("Access-Token", result.Data.Tokens.Token);
                 Response.Headers.Add("Refresh-Token", result.Data.Tokens.RefreshToken);
 
-                return Ok(result.Message);
+                return Ok(result.Data);
             }
 
             return BadRequest(result.Message);
@@ -47,7 +47,7 @@ namespace Portfolio_BackEnd.Controllers
 
                 Response.Headers.Add("Access-Token", result.Data.Tokens.Token);
 
-                return Ok(result.Message);
+                return Ok(result.Data);
             }
 
             return BadRequest(result.Message);

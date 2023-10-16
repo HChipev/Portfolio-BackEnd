@@ -27,7 +27,7 @@ namespace Portfolio_BackEnd.Controllers
                 return Ok(result.Data);
             }
 
-            return BadRequest(result.Data);
+            return BadRequest(result.Message);
         }
 
         [HttpPut("update")]
@@ -41,7 +41,7 @@ namespace Portfolio_BackEnd.Controllers
                 return Ok(result.Data);
             }
 
-            return BadRequest(result.Data);
+            return BadRequest(result.Message);
         }
 
         [HttpDelete("delete/{id}")]
@@ -55,7 +55,7 @@ namespace Portfolio_BackEnd.Controllers
                 return Ok(result.Data);
             }
 
-            return BadRequest(result.Data);
+            return BadRequest(result.Message);
         }
 
         [HttpGet("get/{id}")]
@@ -69,7 +69,7 @@ namespace Portfolio_BackEnd.Controllers
                 return Ok(result.Data);
             }
 
-            return BadRequest(result.Data);
+            return BadRequest(result.Message);
         }
 
         [HttpGet("all")]
@@ -83,7 +83,7 @@ namespace Portfolio_BackEnd.Controllers
                 return Ok(result.Data);
             }
 
-            return BadRequest(result.Data);
+            return BadRequest(result.Message);
         }
     }
 }
