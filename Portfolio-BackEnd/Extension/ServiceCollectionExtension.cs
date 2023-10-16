@@ -64,7 +64,7 @@ namespace Portfolio_BackEnd.Extension
                 {
                     options.AddDefaultPolicy(builder =>
                     {
-                        builder.WithOrigins("https://hristo.ch")
+                        builder.WithOrigins("https://hristo.ch", "http://localhost:5173/")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .WithExposedHeaders("*");
