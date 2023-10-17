@@ -79,6 +79,18 @@ namespace Services.Implementations
             }
         }
 
+        public async Task<ServiceResult<bool>> LogoutAsync()
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+                return new ServiceResult<bool> { IsSuccess = true, Message = "", Data = true };
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult<bool> { IsSuccess = false, Message = e.Message, Data = false };
+            }
+        }
 
         public ServiceResult<TokensResponseViewModel> RefreshTokenAsync(TokenViewModel tokens)
         {

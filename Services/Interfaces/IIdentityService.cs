@@ -9,6 +9,8 @@ namespace Services.Interfaces
     {
         public Task<ServiceResult<TokensResponseViewModel>> LoginAsync(UserLoginViewModel user);
 
+        public Task<ServiceResult<bool>> LogoutAsync();
+
         public ServiceResult<TokensResponseViewModel> RefreshTokenAsync(TokenViewModel tokens);
     }
 }

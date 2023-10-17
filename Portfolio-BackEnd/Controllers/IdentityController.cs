@@ -35,6 +35,19 @@ namespace Portfolio_BackEnd.Controllers
             return BadRequest(result.Message);
         }
 
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            var result = await _identityService.LogoutAsync();
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.Message);
+        }
+
         [HttpPost("refresh-token")]
         [AllowAnonymous]
         public IActionResult RefreshToken([FromBody] TokenViewModel tokensModel)
