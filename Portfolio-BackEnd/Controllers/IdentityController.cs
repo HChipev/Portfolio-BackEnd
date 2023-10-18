@@ -36,7 +36,6 @@ namespace Portfolio_BackEnd.Controllers
         }
 
         [HttpPost("logout")]
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             var result = await _identityService.LogoutAsync();
