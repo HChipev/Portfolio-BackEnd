@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>New Message</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            color: #ffc107; /* amber-500 */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-top: 4px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .footer-top {
+            color: #000; /* amber-500 */
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .footer-bottom {
+            color: #ffc107; /* amber-500 */
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">Hello Hristo,</div>
+    <p>You got a new message from <strong>{{from_name}}</strong>:</p>
+    <p class="message">{{message}}</p>
+    <p class="footer-top">Best wishes,</p>
+    <p class="footer-bottom">{{from_name}} ({{from_email}})</p>
+</div>
+</body>
+</html>
